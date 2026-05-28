@@ -1,6 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
+import { CreateUserDto } from 'src/users/dto/create-user.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -16,5 +17,10 @@ export class AuthController {
       throw new Error('Invalid credentials');
     }
     return this.authService.generateToken(auth);
+  }
+
+  @Post('register')
+  async register(@Body() user: CreateUserDto) {
+    return this.authService.register(user);
   }
 }

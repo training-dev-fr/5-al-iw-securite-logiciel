@@ -3,9 +3,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { User } from './users/user.entity';
+import { User } from './users/entity/user.entity';
 import { SecurityModule } from './security/security.module';
 import { AuthModule } from './auth/auth.module';
+import { Role } from './auth/entity/role.entity';
+import { Permission } from './auth/entity/permission.entity';
+import { RolePermission } from './auth/entity/role-permission.entity';
+import { UserRole } from './users/entity/user-role.entity';
 
 @Module({
   imports: [
@@ -16,7 +20,7 @@ import { AuthModule } from './auth/auth.module';
       username: 'root',
       password: '',
       database: '5-esgi-secu-logiciel',
-      models: [User],
+      models: [User, Role, Permission, RolePermission, UserRole],
       autoLoadModels: true,
       synchronize: true,
     }),

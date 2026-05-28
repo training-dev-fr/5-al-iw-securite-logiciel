@@ -4,9 +4,13 @@ import {
   Table,
   Model,
   DefaultScope,
+  BelongsToMany,
 } from 'sequelize-typescript';
+import { UserRole } from './user-role.entity';
+import { Role } from 'src/auth/entity/role.entity';
 
 export interface UserAttributes {
+  roles: any;
   id: number;
   firstname: string;
   lastname: string;
@@ -45,4 +49,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> {
     allowNull: false,
   })
   password: string | undefined;
+
+  @BelongsToMany(() => Role, () => UserRole)
+  roles: Role[] | undefined;
 }
