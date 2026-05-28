@@ -10,6 +10,8 @@ import { Role } from './auth/entity/role.entity';
 import { Permission } from './auth/entity/permission.entity';
 import { RolePermission } from './auth/entity/role-permission.entity';
 import { UserRole } from './users/entity/user-role.entity';
+import { EventModule } from './event/event.module';
+import { BetModule } from './bet/bet.module';
 
 @Module({
   imports: [
@@ -27,6 +29,8 @@ import { UserRole } from './users/entity/user-role.entity';
     UsersModule,
     SecurityModule,
     AuthModule,
+    EventModule,
+    BetModule,
   ],
   controllers: [AppController],
   providers: [AppService],
