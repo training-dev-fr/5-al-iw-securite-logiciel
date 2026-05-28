@@ -4,6 +4,7 @@ import {
   Table,
   Model,
   BelongsTo,
+  ForeignKey,
 } from 'sequelize-typescript';
 import { Event } from 'src/event/entity/event.entity';
 import { User } from 'src/users/entity/user.entity';
@@ -24,8 +25,22 @@ export class Bet extends Model<BetAttributes, BetCreationAttributes> {
   })
   amount?: number;
 
+  @ForeignKey(() => Event)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  eventId?: number;
+
   @BelongsTo(() => Event)
   event?: Event;
+
+  @ForeignKey(() => User)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  userId?: number;
 
   @BelongsTo(() => User)
   user?: User;

@@ -1,6 +1,6 @@
 import { PartialType, OmitType } from '@nestjs/mapped-types';
-import { CreateEventDto } from './create-bet.dto';
+import { CreateBetDto } from './create-bet.dto';
 
-export class GetEventDto extends PartialType(
-  OmitType(CreateEventDto, [] as const),
+export class GetBetDto extends PartialType(
+  OmitType(CreateBetDto, [] as const),
 ) {}
