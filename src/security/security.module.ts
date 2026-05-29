@@ -1,9 +1,22 @@
 import { Module } from '@nestjs/common';
-import { PasswordService } from './password/password.service';
-import { EmailService } from './email/email.service';
+import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
-  providers: [PasswordService, EmailService],
-  exports: [PasswordService, EmailService]
+  imports: [
+    ThrottlerModule.forRoot({
+      throttlers: [
+        {
+          ttl: 60000 * 5,
+          limit: 100
+        }
+      ]
+    })
+  ],
+  providers: [{
+    provide : APP_GUARD,
+    useClass: ThrottlerGuard
+  }],
+  exports: [ThrottlerModule]
 })
 export class SecurityModule {}
